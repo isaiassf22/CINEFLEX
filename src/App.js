@@ -1,59 +1,45 @@
-import axios from "axios"
+import HomePage from "./homePage"
 import styled from "styled-components"
-import Flyers from "./movielist"
-import { useEffect, useState } from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Session from "./availiability"
+import BookTicket from "./bookTicket"
+import BookedUp from "./bookedUp"
 
 
-export default function App(){
-    const [image,setImage]=useState([])
-    useEffect(()=>{
-        const URL='https://mock-api.driven.com.br/api/v5/cineflex/movies'
-    const promise= axios.get(URL)
+export default function App() {
 
-    promise.then((res)=> {console.log(res.data)
-        setImage(res.data)})
-    
 
-    
-
-    promise.catch((err)=> console.log(err.response.data))
- 
-    },[])
-    
-
-    return(
+    return (
         <>
-            <Bigbox>
-            <Footer>
-                <h1>CINEFLEX</h1>
-            </Footer>
+            <BrowserRouter>
+                <Bigbox>
+                    <Header>
+                        <h1>CINEFLEX</h1>
+                    </Header>
+                    <Routes>
+                        <Route path="/" element={<HomePage />}/>
+                        <Route path="/session" element={<Session/>}/>
+                        <Route path="/bookTicket" element={<BookTicket/>}/>
+                        <Route path="/bookedUp" element={<BookedUp/>}/>
+                    </Routes>
+                    
+                </Bigbox>
+            </BrowserRouter>
 
-            <Main>
-                
-                <h1> Selecione o filme</h1>
-                <div>
-                    {image.map((img)=> <Flyers key={img.id} img={img}/>)}
-                </div>
-            </Main>
-
-            </Bigbox>
-            
         </>
     )
 }
-
-
-
-const Bigbox=styled.div`
+const Bigbox = styled.div`
     width: 600px;
     min-height: 100vh;
     background-color: aliceblue;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    border: 0.5px solid grey;
 `
 
-const Footer=styled.div`
+const Header = styled.div`
     width: 100%;
     height: 100px;
     background-color: #C3CFD9;
@@ -64,32 +50,7 @@ const Footer=styled.div`
         color: #E8833A;
         margin: 0 auto;
         font-size: 40px;
+        border: 1px sol;
     }
     margin-bottom: 20px;
-`
-
-const Main = styled.div`
-    background-color: white;
-    width: 100%;
-   display: flex;
-   flex-direction: column;
-   height: auto;
-   align-items: center;
-   
-    h1{
-      margin: 50px auto;
-    }
-    div{
-        background-color: aqua;
-        
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        img{
-            margin: 40px;
-            width: 200px;
-            height: 300px;
-            border-radius: 8px;
-        }
-    }
 `
