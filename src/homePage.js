@@ -6,6 +6,7 @@ import Flyers from "./flyers"
  
 export default function HomePage(){
     const [images,setImages]=useState([])
+     
     useEffect(()=>{
         const URL='https://mock-api.driven.com.br/api/v5/cineflex/movies'
     const promise= axios.get(URL)
@@ -17,7 +18,11 @@ export default function HomePage(){
  
     },[])
     
-
+    if(images.length===0){
+        return(
+            <h2>Carregando...</h2>
+        )
+    }
     return(
         <>
             

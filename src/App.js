@@ -52,5 +52,5 @@ const Header = styled.div`
         font-size: 40px;
         border: 1px sol;
     }
-    margin-bottom: 20px;
+    
 `
